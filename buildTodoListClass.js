@@ -82,6 +82,14 @@ class TodoList {
     return this.todos.every(todo => todo.isDone());
   }
 
+  shift() {
+    return this.todos.shift();
+  }
+
+  pop() {
+    return this.todos.pop();
+  }
+  
   removeAt(index) {
     this._validateIndex(index);
     return this.todos.splice(index, 1);
@@ -107,4 +115,36 @@ class TodoList {
 
     return newList;
   }
+
+  findByTitle(title) {
+    return this.filter(todo => todo.getTitle() === title).first();
+  }
+
+  allDone() {
+   return this.filter(todo => todo.isDone());
+  }
+
+  allNotDone() {
+    return this.filter(todo => (!(todo.isDone())));
+  }
+
+  markDone(title) {
+    let todo = this.findByTitle(title);
+    if (todo !== undefined) {
+      todo.markDone();
+    }
+  }
+
+  markAllDone() {
+    this.forEach(todo => todo.markDone());
+  }
+
+  markAllUndone() {
+    this.forEach(todo => todo.markUndone());
+  }
+  
+  toArray() {
+    return this.todos.slice();
+  }
+
 }
